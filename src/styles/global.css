@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply font-sans text-cigna-charcoal bg-white;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-heading font-bold;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-cigna-yellow text-cigna-charcoal font-bold py-4 px-8 rounded-lg
+           hover:bg-yellow-400 transition-colors duration-200
+           text-lg inline-flex items-center justify-center gap-2;
+  }
+
+  .btn-secondary {
+    @apply bg-cigna-red text-white font-bold py-4 px-8 rounded-lg
+           hover:bg-red-700 transition-colors duration-200
+           text-lg inline-flex items-center justify-center gap-2;
+  }
+
+  .btn-outline {
+    @apply border-2 border-cigna-yellow text-cigna-yellow font-bold py-4 px-8 rounded-lg
+           hover:bg-cigna-yellow hover:text-cigna-charcoal transition-colors duration-200
+           text-lg inline-flex items-center justify-center gap-2;
+  }
+
+  .section-dark {
+    @apply bg-cigna-charcoal text-white;
+  }
+
+  .section-red {
+    @apply bg-cigna-red text-white;
+  }
+
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}

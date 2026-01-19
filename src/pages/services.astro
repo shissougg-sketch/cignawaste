@@ -1,0 +1,209 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileStickyButtons from '../components/MobileStickyButtons.astro';
+import '../styles/global.css';
+
+const phone = "631-855-5502";
+const phoneLink = "tel:+16318555502";
+const textLink = "sms:+16318555502?body=Hi,%20I'd%20like%20a%20quote%20for%20services.";
+
+const demolitionServices = [
+  "Shed & garage demolition",
+  "Deck & patio removal",
+  "Interior tear-outs",
+  "Bathroom & kitchen demo",
+  "Flooring removal",
+  "Drywall removal",
+  "Small structure demolition",
+  "Pool demolition (above-ground)",
+];
+
+const loadingUses = [
+  "Estate cleanouts",
+  "Hoarding situations",
+  "Move-out cleanups",
+  "Time-sensitive projects",
+  "Heavy items you can't lift",
+  "When you just don't want to",
+];
+---
+
+<BaseLayout
+  title="Demolition & Loading Services Long Island | Cigna Recycling & Waste"
+  description="Professional demolition and loading services in Nassau & Suffolk County. Let us do the heavy lifting. Call 631-855-5502 for a free quote."
+>
+  <Header slot="header" />
+
+  <!-- Hero Section -->
+  <section class="bg-cigna-charcoal text-white py-16">
+    <div class="container-custom">
+      <h1 class="text-4xl md:text-5xl font-heading font-bold mb-4">
+        More Than Just <span class="text-cigna-yellow">Dumpsters</span>
+      </h1>
+      <p class="text-xl text-gray-300 max-w-2xl">
+        From demolition to loading, we offer hands-on services to make your project easier. One call handles it all.
+      </p>
+    </div>
+  </section>
+
+  <!-- Demolition Section -->
+  <section id="demolition" class="py-16 bg-white scroll-mt-20">
+    <div class="container-custom">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Content -->
+        <div>
+          <div class="inline-flex items-center gap-2 bg-cigna-yellow text-cigna-charcoal font-bold px-4 py-2 rounded-full mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+            Demolition Services
+          </div>
+
+          <h2 class="text-3xl md:text-4xl font-heading text-cigna-charcoal mb-6">
+            Safe & Efficient <span class="text-cigna-red">Demolition</span>
+          </h2>
+
+          <p class="text-lg text-gray-600 mb-6">
+            Whether you're starting a renovation or clearing out an old structure, our demolition services get the job done safely and efficiently. We handle everything from small interior tear-outs to complete structure removal.
+          </p>
+
+          <h3 class="font-bold text-cigna-charcoal mb-3">What We Demolish:</h3>
+          <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 mb-6">
+            {demolitionServices.map((service) => (
+              <li class="flex items-center gap-2 text-gray-600">
+                <svg class="w-5 h-5 text-cigna-red flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                {service}
+              </li>
+            ))}
+          </ul>
+
+          <div class="bg-gray-100 rounded-xl p-6 mb-6">
+            <h4 class="font-bold text-cigna-charcoal mb-2">How It Works:</h4>
+            <ol class="list-decimal list-inside space-y-2 text-gray-600">
+              <li>Contact us with details about your project</li>
+              <li>We provide a free on-site estimate</li>
+              <li>Schedule the work at your convenience</li>
+              <li>We demo, load, and haul away everything</li>
+            </ol>
+          </div>
+
+          <a href={phoneLink} class="btn-secondary">
+            Request Demolition Quote
+          </a>
+        </div>
+
+        <!-- Image placeholder -->
+        <div class="bg-gray-200 aspect-square rounded-xl flex items-center justify-center">
+          <span class="text-gray-400">Demolition Photo</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Divider -->
+  <div class="bg-cigna-yellow h-2"></div>
+
+  <!-- Loading Service Section -->
+  <section id="loading" class="py-16 bg-gray-100 scroll-mt-20">
+    <div class="container-custom">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <!-- Image placeholder (on left for alternating layout) -->
+        <div class="bg-gray-300 aspect-square rounded-xl flex items-center justify-center order-2 lg:order-1">
+          <span class="text-gray-500">Loading Service Photo</span>
+        </div>
+
+        <!-- Content -->
+        <div class="order-1 lg:order-2">
+          <div class="inline-flex items-center gap-2 bg-cigna-red text-white font-bold px-4 py-2 rounded-full mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
+            </svg>
+            Loading Service
+          </div>
+
+          <h2 class="text-3xl md:text-4xl font-heading text-cigna-charcoal mb-6">
+            We Do the <span class="text-cigna-red">Heavy Lifting</span>
+          </h2>
+
+          <p class="text-lg text-gray-600 mb-6">
+            Don't want to load the dumpster yourself? We'll do it for you. Our loading service is perfect for when you don't have the time, the help, or just don't want to deal with it.
+          </p>
+
+          <h3 class="font-bold text-cigna-charcoal mb-3">Perfect For:</h3>
+          <ul class="space-y-2 mb-6">
+            {loadingUses.map((use) => (
+              <li class="flex items-center gap-2 text-gray-600">
+                <svg class="w-5 h-5 text-cigna-red flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+                {use}
+              </li>
+            ))}
+          </ul>
+
+          <div class="bg-white rounded-xl p-6 mb-6 border-l-4 border-cigna-yellow">
+            <h4 class="font-bold text-cigna-charcoal mb-2">Combine with Dumpster Rental</h4>
+            <p class="text-gray-600">
+              Rent a dumpster and add loading service for a complete solution. We'll bring the dumpster, load it up, and haul it away — you just point to what goes.
+            </p>
+          </div>
+
+          <a href={phoneLink} class="btn-secondary">
+            Add Loading Service
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Combined Services CTA -->
+  <section class="py-16 bg-cigna-charcoal text-white">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-heading mb-4">
+          One Call. <span class="text-cigna-yellow">Everything Handled.</span>
+        </h2>
+        <p class="text-xl text-gray-300 mb-8">
+          Need demolition, a dumpster, and loading service? We can bundle it all. One quote, one team, one less thing to worry about.
+        </p>
+
+        <div class="grid sm:grid-cols-3 gap-6 mb-8">
+          <div class="bg-white/10 rounded-xl p-6">
+            <div class="text-4xl mb-2">🔨</div>
+            <h3 class="font-bold">Demolition</h3>
+            <p class="text-sm text-gray-400">We tear it down</p>
+          </div>
+          <div class="bg-white/10 rounded-xl p-6">
+            <div class="text-4xl mb-2">📦</div>
+            <h3 class="font-bold">Dumpster</h3>
+            <p class="text-sm text-gray-400">We provide the container</p>
+          </div>
+          <div class="bg-white/10 rounded-xl p-6">
+            <div class="text-4xl mb-2">💪</div>
+            <h3 class="font-bold">Loading</h3>
+            <p class="text-sm text-gray-400">We load it up</p>
+          </div>
+        </div>
+
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href={phoneLink} class="btn-primary text-lg">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+            </svg>
+            Call {phone}
+          </a>
+          <a href="/contact" class="btn-outline text-lg">
+            Request Quote Online
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+  <MobileStickyButtons slot="mobile-cta" />
+</BaseLayout>

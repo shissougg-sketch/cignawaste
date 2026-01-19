@@ -1,0 +1,232 @@
+---
+interface Props {
+  variant?: 'light' | 'dark';
+  compact?: boolean;
+}
+
+const { variant = 'light', compact = false } = Astro.props;
+
+const towns = [
+  "-- Select Town --",
+  "Amityville",
+  "Babylon",
+  "Bay Shore",
+  "Bethpage",
+  "Brentwood",
+  "Brookhaven",
+  "Commack",
+  "Copiague",
+  "Deer Park",
+  "East Islip",
+  "East Meadow",
+  "Elmont",
+  "Farmingdale",
+  "Franklin Square",
+  "Freeport",
+  "Garden City",
+  "Glen Cove",
+  "Great Neck",
+  "Hempstead",
+  "Hicksville",
+  "Huntington",
+  "Islip",
+  "Lake Ronkonkoma",
+  "Levittown",
+  "Lindenhurst",
+  "Long Beach",
+  "Lynbrook",
+  "Massapequa",
+  "Merrick",
+  "Mineola",
+  "New Hyde Park",
+  "Northport",
+  "Oceanside",
+  "Oyster Bay",
+  "Patchogue",
+  "Plainview",
+  "Port Jefferson",
+  "Port Washington",
+  "Riverhead",
+  "Rockville Centre",
+  "Roosevelt",
+  "Sayville",
+  "Seaford",
+  "Smithtown",
+  "Valley Stream",
+  "Wantagh",
+  "West Babylon",
+  "West Islip",
+  "Westbury",
+  "Other (specify in description)",
+];
+
+const services = [
+  "-- Select Service --",
+  "Dumpster Rental",
+  "Demolition",
+  "Loading Service",
+  "Dumpster + Loading Service",
+  "Multiple Services",
+];
+
+const dumpsterSizes = [
+  "-- Select Size (Optional) --",
+  "10 Yard",
+  "15 Yard",
+  "20 Yard",
+  "30 Yard",
+  "Not Sure",
+];
+
+const inputClass = variant === 'dark'
+  ? "w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-cigna-yellow focus:border-transparent"
+  : "w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-cigna-red focus:border-transparent";
+
+const labelClass = variant === 'dark'
+  ? "block text-sm font-medium text-gray-300 mb-1"
+  : "block text-sm font-medium text-gray-700 mb-1";
+---
+
+<form id="quote-form" class={compact ? "space-y-3" : "space-y-4"}>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Name -->
+    <div>
+      <label for="name" class={labelClass}>Name *</label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        required
+        placeholder="Your name"
+        class={inputClass}
+      />
+    </div>
+
+    <!-- Phone -->
+    <div>
+      <label for="phone" class={labelClass}>Phone *</label>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        required
+        placeholder="(555) 555-5555"
+        class={inputClass}
+      />
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Email -->
+    <div>
+      <label for="email" class={labelClass}>Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        placeholder="your@email.com"
+        class={inputClass}
+      />
+    </div>
+
+    <!-- Town -->
+    <div>
+      <label for="town" class={labelClass}>Town *</label>
+      <select
+        id="town"
+        name="town"
+        required
+        class={inputClass}
+      >
+        {towns.map((town) => (
+          <option value={town === "-- Select Town --" ? "" : town}>{town}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <!-- Service Type -->
+    <div>
+      <label for="service" class={labelClass}>Service Type *</label>
+      <select
+        id="service"
+        name="service"
+        required
+        class={inputClass}
+      >
+        {services.map((service) => (
+          <option value={service === "-- Select Service --" ? "" : service}>{service}</option>
+        ))}
+      </select>
+    </div>
+
+    <!-- Dumpster Size -->
+    <div>
+      <label for="size" class={labelClass}>Dumpster Size</label>
+      <select
+        id="size"
+        name="size"
+        class={inputClass}
+      >
+        {dumpsterSizes.map((size) => (
+          <option value={size.includes("--") ? "" : size}>{size}</option>
+        ))}
+      </select>
+    </div>
+  </div>
+
+  <!-- Description -->
+  <div>
+    <label for="description" class={labelClass}>Tell us about your project</label>
+    <textarea
+      id="description"
+      name="description"
+      rows={compact ? 2 : 3}
+      placeholder="Brief description of your project..."
+      class={inputClass}
+    ></textarea>
+  </div>
+
+  <!-- Submit Button -->
+  <button
+    type="submit"
+    class="w-full btn-primary text-xl py-4"
+  >
+    Get My Free Quote
+  </button>
+
+  <!-- Form Messages -->
+  <div id="form-success" class="hidden p-4 bg-green-100 text-green-800 rounded-lg text-center">
+    Thank you! We'll get back to you shortly.
+  </div>
+  <div id="form-error" class="hidden p-4 bg-red-100 text-red-800 rounded-lg text-center">
+    Something went wrong. Please call us directly at 631-855-5502.
+  </div>
+</form>
+
+<script>
+  const form = document.getElementById('quote-form') as HTMLFormElement;
+  const successMsg = document.getElementById('form-success');
+  const errorMsg = document.getElementById('form-error');
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const data = Object.fromEntries(formData.entries());
+
+    // For now, just show success (Firebase integration will be added later)
+    // In production, this would POST to /api/quote
+    try {
+      // Simulate form submission
+      console.log('Form data:', data);
+
+      // Show success message
+      form.style.display = 'none';
+      successMsg?.classList.remove('hidden');
+    } catch (error) {
+      errorMsg?.classList.remove('hidden');
+    }
+  });
+</script>

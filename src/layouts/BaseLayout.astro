@@ -1,0 +1,72 @@
+---
+interface Props {
+  title: string;
+  description: string;
+}
+
+const { title, description } = Astro.props;
+const phone = "631-855-5502";
+const phoneFormatted = "+1-631-855-5502";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={Astro.url} />
+    <meta property="og:image" content="/images/logo/CignaLogo.png" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/images/logo/CignaLogo.png" />
+
+    <title>{title}</title>
+
+    <!-- Schema.org LocalBusiness -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Cigna Recycling & Waste",
+        "description": "Dumpster rentals, demolition, and loading services for Nassau and Suffolk County, Long Island.",
+        "url": "https://cignadumpsters.com",
+        "telephone": "+1-631-855-5502",
+        "priceRange": "$$",
+        "areaServed": [
+          {
+            "@type": "County",
+            "name": "Nassau County",
+            "containedInPlace": {
+              "@type": "State",
+              "name": "New York"
+            }
+          },
+          {
+            "@type": "County",
+            "name": "Suffolk County",
+            "containedInPlace": {
+              "@type": "State",
+              "name": "New York"
+            }
+          }
+        ],
+        "serviceType": ["Dumpster Rental", "Demolition", "Loading Service", "Waste Management"]
+      }
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <slot name="header" />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <slot name="footer" />
+    <slot name="mobile-cta" />
+  </body>
+</html>
