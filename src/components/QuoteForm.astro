@@ -2,9 +2,10 @@
 interface Props {
   variant?: 'light' | 'dark';
   compact?: boolean;
+  redirectUrl?: string;
 }
 
-const { variant = 'light', compact = false } = Astro.props;
+const { variant = 'light', compact = false, redirectUrl = 'https://cignadumpsters.com/contact?submitted=true' } = Astro.props;
 
 const towns = [
   "-- Select Town --",
@@ -198,7 +199,7 @@ const labelClass = variant === 'dark'
   <input type="hidden" name="_captcha" value="false">
   <input type="hidden" name="_template" value="table">
   <input type="text" name="_honey" style="display:none">
-  <input type="hidden" name="_next" value="https://cignadumpsters.com/contact?submitted=true">
+  <input type="hidden" name="_next" value={redirectUrl}>
 
   <!-- Submit Button -->
   <button
