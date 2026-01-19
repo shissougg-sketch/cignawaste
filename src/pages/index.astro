@@ -33,9 +33,14 @@ const whyChoose = [
 
   <!-- Hero Section -->
   <section class="relative bg-cigna-charcoal text-white overflow-hidden">
-    <!-- Background pattern -->
-    <div class="absolute inset-0 opacity-10">
-      <div class="absolute inset-0" style="background-image: url('data:image/svg+xml,%3Csvg width=\"60\" height=\"60\" viewBox=\"0 0 60 60\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cg fill=\"none\" fill-rule=\"evenodd\"%3E%3Cg fill=\"%23FFD700\" fill-opacity=\"0.4\"%3E%3Cpath d=\"M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E');"></div>
+    <!-- Background image -->
+    <div class="absolute inset-0">
+      <img
+        src="/images/hero/hero.jpg"
+        alt="Cigna dumpster rental service"
+        class="w-full h-full object-cover"
+      />
+      <div class="absolute inset-0 bg-cigna-charcoal/70"></div>
     </div>
 
     <div class="container-custom relative py-16 md:py-24">
@@ -178,11 +183,16 @@ const whyChoose = [
         </p>
       </div>
 
-      <!-- Placeholder gallery grid -->
+      <!-- Gallery grid -->
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         {[1, 2, 3, 4, 5, 6].map((i) => (
-          <div class="aspect-square bg-gray-200 rounded-lg flex items-center justify-center">
-            <span class="text-gray-400 text-sm">Photo {i}</span>
+          <div class="aspect-square rounded-lg overflow-hidden">
+            <img
+              src={`/images/gallery/gallery-${i}.jpg`}
+              alt={`Cigna job site ${i}`}
+              class="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
           </div>
         ))}
       </div>

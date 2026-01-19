@@ -8,20 +8,24 @@ import '../styles/global.css';
 const phone = "631-855-5502";
 const phoneLink = "tel:+16318555502";
 
-// Placeholder gallery items - replace with real photos
+// Real gallery items
 const galleryItems = [
-  { id: 1, category: "dumpsters", alt: "10 yard dumpster on residential driveway" },
-  { id: 2, category: "dumpsters", alt: "20 yard dumpster at construction site" },
-  { id: 3, category: "demo", alt: "Deck demolition in progress" },
-  { id: 4, category: "jobs", alt: "Completed cleanout job" },
-  { id: 5, category: "dumpsters", alt: "30 yard dumpster for commercial project" },
-  { id: 6, category: "demo", alt: "Shed removal project" },
-  { id: 7, category: "jobs", alt: "Estate cleanout before and after" },
-  { id: 8, category: "dumpsters", alt: "15 yard dumpster for renovation" },
-  { id: 9, category: "demo", alt: "Interior demolition" },
-  { id: 10, category: "jobs", alt: "Garage cleanout completed" },
-  { id: 11, category: "dumpsters", alt: "Multiple dumpsters on job site" },
-  { id: 12, category: "jobs", alt: "Roofing debris removal" },
+  { id: 1, src: "/images/gallery/gallery-1.jpg", category: "jobs", alt: "Job site 1" },
+  { id: 2, src: "/images/gallery/gallery-2.jpg", category: "jobs", alt: "Job site 2" },
+  { id: 3, src: "/images/gallery/gallery-3.jpg", category: "jobs", alt: "Job site 3" },
+  { id: 4, src: "/images/gallery/gallery-4.jpg", category: "jobs", alt: "Job site 4" },
+  { id: 5, src: "/images/gallery/gallery-5.jpg", category: "jobs", alt: "Job site 5" },
+  { id: 6, src: "/images/gallery/gallery-6.jpg", category: "jobs", alt: "Job site 6" },
+  { id: 7, src: "/images/gallery/gallery-7.jpg", category: "jobs", alt: "Job site 7" },
+  { id: 8, src: "/images/gallery/gallery-8.jpg", category: "jobs", alt: "Job site 8" },
+  { id: 9, src: "/images/gallery/gallery-9.jpg", category: "jobs", alt: "Job site 9" },
+  { id: 10, src: "/images/gallery/gallery-10.jpg", category: "jobs", alt: "Job site 10" },
+  { id: 11, src: "/images/gallery/gallery-11.jpg", category: "jobs", alt: "Job site 11" },
+  { id: 12, src: "/images/gallery/demo-1.jpg", category: "demo", alt: "Demolition work 1" },
+  { id: 13, src: "/images/gallery/demo-2.jpg", category: "demo", alt: "Demolition work 2" },
+  { id: 14, src: "/images/gallery/loading-1.jpg", category: "jobs", alt: "Loading service" },
+  { id: 15, src: "/images/gallery/cleanup-before.jpg", category: "jobs", alt: "Cleanup before" },
+  { id: 16, src: "/images/gallery/cleanup-after.jpg", category: "jobs", alt: "Cleanup after" },
 ];
 
 const categories = [
@@ -74,14 +78,16 @@ const categories = [
         {galleryItems.map((item) => (
           <div
             data-category={item.category}
-            class="gallery-item aspect-square bg-gray-200 rounded-lg overflow-hidden cursor-pointer hover:opacity-90 transition-opacity relative group"
+            class="gallery-item aspect-square rounded-lg overflow-hidden cursor-pointer relative group"
           >
-            <!-- Placeholder - replace with actual images -->
-            <div class="absolute inset-0 flex items-center justify-center text-gray-400 text-sm text-center p-4">
-              {item.alt}
-            </div>
+            <img
+              src={item.src}
+              alt={item.alt}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
             <!-- Overlay on hover -->
-            <div class="absolute inset-0 bg-cigna-charcoal/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+            <div class="absolute inset-0 bg-cigna-charcoal/30 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
               <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
               </svg>
@@ -89,10 +95,6 @@ const categories = [
           </div>
         ))}
       </div>
-
-      <p class="text-center text-gray-500 mt-8">
-        Photos coming soon! We're gathering images from our recent jobs.
-      </p>
     </div>
   </section>
 

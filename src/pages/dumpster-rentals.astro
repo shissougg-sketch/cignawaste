@@ -13,8 +13,9 @@ const textLink = "sms:+16318555502?body=Hi,%20I'd%20like%20a%20quote%20for%20a%2
 const dumpsterSizes = [
   {
     size: "10 Yard",
+    image: "/images/dumpsters/dumpster-10.png",
     dimensions: "12' L x 8' W x 3.5' H",
-    holds: "Holds 4-5 pickup truck loads",
+    holds: "Holds 3-4 pickup truck loads",
     idealFor: [
       "Small cleanouts",
       "Garage clearing",
@@ -25,8 +26,9 @@ const dumpsterSizes = [
   },
   {
     size: "15 Yard",
+    image: "/images/dumpsters/dumpster-15.png",
     dimensions: "14' L x 8' W x 4.5' H",
-    holds: "Holds 6-7 pickup truck loads",
+    holds: "Holds 5-6 pickup truck loads",
     idealFor: [
       "Kitchen or bathroom remodel",
       "Basement cleanout",
@@ -37,8 +39,9 @@ const dumpsterSizes = [
   },
   {
     size: "20 Yard",
+    image: "/images/dumpsters/dumpster-20.png",
     dimensions: "22' L x 8' W x 4.5' H",
-    holds: "Holds 8-10 pickup truck loads",
+    holds: "Holds 7-8 pickup truck loads",
     idealFor: [
       "Roof tear-offs",
       "Large home cleanouts",
@@ -49,8 +52,9 @@ const dumpsterSizes = [
   },
   {
     size: "30 Yard",
+    image: "/images/dumpsters/dumpster-30.png",
     dimensions: "22' L x 8' W x 6' H",
-    holds: "Holds 12+ pickup truck loads",
+    holds: "Holds 10-12 pickup truck loads",
     idealFor: [
       "Major construction projects",
       "Commercial jobs",
@@ -144,9 +148,13 @@ const notAccepted = [
       <div class="space-y-8">
         {dumpsterSizes.map((dumpster, index) => (
           <div class={`rounded-xl overflow-hidden shadow-lg ${index % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'} flex flex-col lg:flex`}>
-            <!-- Image placeholder -->
-            <div class="lg:w-1/3 bg-gray-200 aspect-video lg:aspect-auto flex items-center justify-center">
-              <span class="text-gray-400">{dumpster.size} Photo</span>
+            <!-- Dumpster Image -->
+            <div class="lg:w-1/3 bg-[#EFEDE8] aspect-video lg:aspect-auto flex items-center justify-center p-6">
+              <img
+                src={dumpster.image}
+                alt={`${dumpster.size} dumpster`}
+                class="max-h-48 lg:max-h-64 w-auto object-contain"
+              />
             </div>
 
             <!-- Content -->
