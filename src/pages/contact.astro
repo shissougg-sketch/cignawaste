@@ -154,9 +154,34 @@ const serviceAreas = {
             Request a Quote Online
           </h2>
           <div class="bg-gray-50 rounded-xl p-6 md:p-8">
-            <QuoteForm />
+            <!-- Success Message (shown after form submission) -->
+            <div id="submission-success" class="hidden text-center py-8">
+              <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-cigna-charcoal mb-2">Quote Request Sent!</h3>
+              <p class="text-gray-600 mb-4">Thank you for reaching out. We'll get back to you shortly.</p>
+              <p class="text-sm text-gray-500">You can also call us at <a href="tel:+16318555502" class="text-cigna-red font-bold">631-855-5502</a> for immediate assistance.</p>
+            </div>
+            <!-- Form (hidden after submission) -->
+            <div id="quote-form-container">
+              <QuoteForm />
+            </div>
           </div>
         </div>
+
+        <script>
+          if (window.location.search.includes('submitted=true')) {
+            const successEl = document.getElementById('submission-success');
+            const formContainer = document.getElementById('quote-form-container');
+            if (successEl && formContainer) {
+              successEl.classList.remove('hidden');
+              formContainer.classList.add('hidden');
+            }
+          }
+        </script>
       </div>
     </div>
   </section>
