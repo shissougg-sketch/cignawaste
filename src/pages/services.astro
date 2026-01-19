@@ -3,11 +3,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MobileStickyButtons from '../components/MobileStickyButtons.astro';
+import { PHONE, PHONE_LINK, TEXT_LINK } from '../constants/contact';
 import '../styles/global.css';
 
-const phone = "631-855-5502";
-const phoneLink = "tel:+16318555502";
-const textLink = "sms:+16318555502?body=Hi,%20I'd%20like%20a%20quote%20for%20services.";
+const phone = PHONE;
+const phoneLink = PHONE_LINK;
+const textLink = TEXT_LINK;
 
 const demolitionServices = [
   "Shed & garage demolition",

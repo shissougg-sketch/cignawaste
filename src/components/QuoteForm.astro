@@ -80,17 +80,21 @@ const dumpsterSizes = [
 ];
 
 const inputClass = variant === 'dark'
-  ? "w-full px-4 py-3 rounded-lg bg-gray-800 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-cigna-yellow focus:border-transparent"
-  : "w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-cigna-red focus:border-transparent";
+  ? "w-full px-4 py-3.5 rounded-lg bg-gray-800 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-cigna-yellow focus:border-transparent min-h-[44px]"
+  : "w-full px-4 py-3.5 rounded-lg border border-gray-300 focus:ring-2 focus:ring-cigna-red focus:border-transparent min-h-[44px]";
 
 const labelClass = variant === 'dark'
-  ? "block text-sm font-medium text-gray-300 mb-1"
-  : "block text-sm font-medium text-gray-700 mb-1";
+  ? "block text-sm sm:text-base font-medium text-gray-300 mb-1"
+  : "block text-sm sm:text-base font-medium text-gray-700 mb-1";
+
+// FormSubmit email - after first form submission, FormSubmit will send a confirmation email
+// Once confirmed, the form will work automatically
+const FORMSUBMIT_EMAIL = "Mike.Ciigna24@gmail.com";
 ---
 
 <form
   id="quote-form"
-  action="https://formsubmit.co/Mike.Ciigna24@gmail.com"
+  action={`https://formsubmit.co/${FORMSUBMIT_EMAIL}`}
   method="POST"
   class={compact ? "space-y-3" : "space-y-4"}
 >
@@ -103,8 +107,10 @@ const labelClass = variant === 'dark'
         id="name"
         name="name"
         required
+        maxlength="100"
         placeholder="Your name"
         class={inputClass}
+        aria-required="true"
       />
     </div>
 
@@ -116,8 +122,11 @@ const labelClass = variant === 'dark'
         id="phone"
         name="phone"
         required
+        maxlength="20"
+        pattern="[\d\s\-\(\)\+]{10,20}"
         placeholder="(555) 555-5555"
         class={inputClass}
+        aria-required="true"
       />
     </div>
   </div>
@@ -130,6 +139,7 @@ const labelClass = variant === 'dark'
         type="email"
         id="email"
         name="email"
+        maxlength="100"
         placeholder="your@email.com"
         class={inputClass}
       />
@@ -143,6 +153,7 @@ const labelClass = variant === 'dark'
         name="town"
         required
         class={inputClass}
+        aria-required="true"
       >
         {towns.map((town) => (
           <option value={town === "-- Select Town --" ? "" : town}>{town}</option>
@@ -160,6 +171,7 @@ const labelClass = variant === 'dark'
         name="service"
         required
         class={inputClass}
+        aria-required="true"
       >
         {services.map((service) => (
           <option value={service === "-- Select Service --" ? "" : service}>{service}</option>
@@ -189,6 +201,7 @@ const labelClass = variant === 'dark'
       id="description"
       name="description"
       rows={compact ? 2 : 3}
+      maxlength="1000"
       placeholder="Brief description of your project..."
       class={inputClass}
     ></textarea>
@@ -196,9 +209,9 @@ const labelClass = variant === 'dark'
 
   <!-- FormSubmit Configuration -->
   <input type="hidden" name="_subject" value="New Quote Request - Cigna Dumpsters">
-  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_captcha" value="true">
   <input type="hidden" name="_template" value="table">
-  <input type="text" name="_honey" style="display:none">
+  <input type="text" name="_honey" class="hidden" tabindex="-1" autocomplete="off">
   <input type="hidden" name="_next" value={redirectUrl}>
 
   <!-- Submit Button -->

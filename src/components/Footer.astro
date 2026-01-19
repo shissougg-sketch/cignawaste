@@ -1,16 +1,11 @@
 ---
-const phone = "631-855-5502";
-const phoneLink = "tel:+16318555502";
-const textLink = "sms:+16318555502";
-const currentYear = new Date().getFullYear();
+import { PHONE, PHONE_LINK, TEXT_LINK, NAV_LINKS } from '../constants/contact';
 
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/dumpster-rentals", label: "Dumpster Rentals" },
-  { href: "/services", label: "Services" },
-  { href: "/gallery", label: "Gallery" },
-  { href: "/contact", label: "Contact" },
-];
+const phone = PHONE;
+const phoneLink = PHONE_LINK;
+const textLink = TEXT_LINK;
+const currentYear = new Date().getFullYear();
+const navLinks = NAV_LINKS;
 
 const serviceAreas = [
   "Nassau County",
