@@ -13,6 +13,13 @@
     @apply font-sans text-cigna-charcoal bg-white;
   }
 
+  /* On mobile, set body background to match footer so no white gap appears above sticky buttons */
+  @media (max-width: 767px) {
+    body {
+      background-color: #1A1A1A;
+    }
+  }
+
   h1, h2, h3, h4 {
     @apply font-heading font-bold;
   }

@@ -6,18 +6,8 @@ interface Props {
 
 const { variant = 'light', compact = false } = Astro.props;
 
-const towns = [
-  "-- Select Town --",
-  "Amityville",
-  "Babylon",
-  "Bay Shore",
+const nassauTowns = [
   "Bethpage",
-  "Brentwood",
-  "Brookhaven",
-  "Commack",
-  "Copiague",
-  "Deer Park",
-  "East Islip",
   "East Meadow",
   "Elmont",
   "Farmingdale",
@@ -28,36 +18,47 @@ const towns = [
   "Great Neck",
   "Hempstead",
   "Hicksville",
-  "Huntington",
-  "Islip",
-  "Lake Ronkonkoma",
   "Levittown",
-  "Lindenhurst",
   "Long Beach",
   "Lynbrook",
   "Massapequa",
   "Merrick",
   "Mineola",
   "New Hyde Park",
-  "Northport",
   "Oceanside",
   "Oyster Bay",
-  "Patchogue",
   "Plainview",
-  "Port Jefferson",
   "Port Washington",
-  "Riverhead",
   "Rockville Centre",
   "Roosevelt",
-  "Sayville",
   "Seaford",
-  "Smithtown",
   "Valley Stream",
   "Wantagh",
+  "Westbury",
+];
+
+const suffolkTowns = [
+  "Amityville",
+  "Babylon",
+  "Bay Shore",
+  "Brentwood",
+  "Brookhaven",
+  "Commack",
+  "Copiague",
+  "Deer Park",
+  "East Islip",
+  "Huntington",
+  "Islip",
+  "Lake Ronkonkoma",
+  "Lindenhurst",
+  "Northport",
+  "Patchogue",
+  "Port Jefferson",
+  "Riverhead",
+  "Sayville",
+  "Smithtown",
   "West Babylon",
   "West Islip",
-  "Westbury",
-  "Other (specify in description)",
 ];
 
 const services = [
@@ -154,9 +155,18 @@ const FORMSUBMIT_EMAIL = "Mike.Ciigna24@gmail.com";
         class={inputClass}
         aria-required="true"
       >
-        {towns.map((town) => (
-          <option value={town === "-- Select Town --" ? "" : town}>{town}</option>
-        ))}
+        <option value="">-- Select Town --</option>
+        <optgroup label="Nassau County">
+          {nassauTowns.map((town) => (
+            <option value={town}>{town}</option>
+          ))}
+        </optgroup>
+        <optgroup label="Suffolk County">
+          {suffolkTowns.map((town) => (
+            <option value={town}>{town}</option>
+          ))}
+        </optgroup>
+        <option value="Other (specify in description)">Other (specify in description)</option>
       </select>
     </div>
   </div>
