@@ -13,6 +13,7 @@ export const NAV_LINKS = [
   { href: "/dumpster-rentals", label: "Dumpster Rentals" },
   { href: "/services", label: "Services" },
   { href: "/gallery", label: "Gallery" },
+  { href: "/faq", label: "FAQ" },
   { href: "/contact", label: "Contact" },
 ] as const;
 

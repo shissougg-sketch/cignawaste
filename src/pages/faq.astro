@@ -1,0 +1,163 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import MobileStickyButtons from '../components/MobileStickyButtons.astro';
+import { PHONE, PHONE_LINK, TEXT_LINK } from '../constants/contact';
+import '../styles/global.css';
+
+const phone = PHONE;
+const phoneLink = PHONE_LINK;
+const textLink = TEXT_LINK;
+
+const faqs = [
+  {
+    question: "How long can I keep the dumpster?",
+    answer: "Our standard rental period is 7 days, which works for most residential and small commercial projects. If you need more time, just let us know — we offer flexible extensions at a reasonable daily rate. There's no penalty for finishing early either."
+  },
+  {
+    question: "What dumpster sizes do you offer?",
+    answer: "We offer four sizes to fit any project: 10 yard (great for small cleanouts and garage clearing), 15 yard (kitchen/bathroom remodels), 20 yard (roof tear-offs and renovations), and 30 yard (major construction and demolition). Not sure which size you need? Call us and we'll help you figure it out."
+  },
+  {
+    question: "What can I put in the dumpster?",
+    answer: "Most household and construction debris is fine: furniture, appliances, wood, drywall, roofing materials, yard waste, and general junk. We'll haul away almost anything from your cleanout or renovation project."
+  },
+  {
+    question: "What can't go in the dumpster?",
+    answer: "No concrete (unless you specifically order a concrete-only dumpster), no mattresses (your town's bulk pickup handles those), and no hazardous materials like paint, chemicals, oil, batteries, tires, or asbestos. Electronics and appliances with refrigerants (like fridges and AC units) may have additional fees. When in doubt, just ask — we're happy to clarify."
+  },
+  {
+    question: "How fast can you deliver?",
+    answer: "We offer same-day and next-day delivery for most locations in Nassau and Suffolk County. When you call, we'll give you a specific delivery window so you're not waiting around all day. We show up when we say we will."
+  },
+  {
+    question: "Do I need a permit for the dumpster?",
+    answer: "If the dumpster is placed on your private property (driveway, yard, etc.), you typically don't need a permit. If it needs to go on the street or public right-of-way, you may need a permit from your town. We can advise you on this when you call."
+  },
+  {
+    question: "What areas do you serve?",
+    answer: "We serve all of Nassau County and Suffolk County — from the Queens border to the Hamptons. If you're on Long Island, we've got you covered. Just tell us your town when you call."
+  },
+  {
+    question: "How does pricing work?",
+    answer: "Our pricing is straightforward with no hidden fees. The price includes delivery, pickup, and disposal up to a certain weight limit. We'll give you a clear quote over the phone based on the dumpster size and your location. No surprises when the bill comes."
+  },
+  {
+    question: "Can you load the dumpster for me?",
+    answer: "Yes! We offer a loading service where our crew does the heavy lifting. This is perfect for estate cleanouts, hoarding situations, or when you just don't have the time or ability to load it yourself. Ask about bundling dumpster rental with loading service."
+  },
+  {
+    question: "What if I fill the dumpster before my rental period ends?",
+    answer: "Just give us a call and we'll come pick it up early — there's no penalty for finishing ahead of schedule. If you need another dumpster, we can swap it out or schedule a second delivery."
+  },
+  {
+    question: "Do you offer demolition services?",
+    answer: "Yes! We handle residential and light commercial demolition including shed removal, deck demolition, interior tear-outs, bathroom/kitchen demo, and more. We can bundle demolition with dumpster rental for a complete solution."
+  },
+  {
+    question: "What if I need to cancel or reschedule?",
+    answer: "Life happens. If you need to cancel or reschedule your delivery, just call us as soon as you know. We're flexible and will work with you to find a new time that works."
+  }
+];
+---
+
+<BaseLayout
+  title="FAQ | Dumpster Rental Questions | Cigna Recycling & Waste"
+  description="Frequently asked questions about dumpster rentals in Nassau & Suffolk County. Learn about sizes, pricing, what you can throw away, and more."
+>
+  <Header slot="header" />
+
+  <!-- Hero Section -->
+  <section class="bg-cigna-charcoal text-white py-16">
+    <div class="container-custom">
+      <h1 class="text-4xl md:text-5xl font-heading font-bold mb-4">
+        Frequently Asked <span class="text-cigna-yellow">Questions</span>
+      </h1>
+      <p class="text-xl text-gray-300 max-w-2xl">
+        Everything you need to know about renting a dumpster on Long Island.
+      </p>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section class="py-16 bg-white">
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto">
+        <div class="space-y-4">
+          {faqs.map((faq, index) => (
+            <details class="group bg-gray-50 rounded-xl border border-gray-200 overflow-hidden">
+              <summary class="p-5 md:p-6 cursor-pointer list-none flex items-center justify-between gap-4 hover:bg-gray-100 transition-colors">
+                <h2 class="text-lg md:text-xl font-bold text-cigna-charcoal text-left">
+                  {faq.question}
+                </h2>
+                <svg class="w-5 h-5 text-cigna-red flex-shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </summary>
+              <div class="px-5 pb-5 md:px-6 md:pb-6">
+                <p class="text-gray-600 leading-relaxed">
+                  {faq.answer}
+                </p>
+              </div>
+            </details>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Still Have Questions CTA -->
+  <section class="py-16 bg-gray-100">
+    <div class="container-custom">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-2xl md:text-3xl font-heading font-bold text-cigna-charcoal mb-4">
+          Still Have Questions?
+        </h2>
+        <p class="text-lg text-gray-600 mb-8">
+          We're happy to help. Give us a call or send a text — we'll get back to you quickly.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a href={phoneLink} class="btn-secondary">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+            </svg>
+            Call {phone}
+          </a>
+          <a href={textLink} class="btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+              <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd" />
+            </svg>
+            Text for Quote
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quick Links -->
+  <section class="py-12 bg-cigna-charcoal text-white">
+    <div class="container-custom text-center">
+      <p class="text-gray-400 mb-4">Learn more about our services:</p>
+      <div class="flex flex-wrap gap-4 justify-center">
+        <a href="/dumpster-rentals" class="text-cigna-yellow hover:text-yellow-400 font-medium">Dumpster Sizes & Pricing</a>
+        <span class="text-gray-600">|</span>
+        <a href="/services" class="text-cigna-yellow hover:text-yellow-400 font-medium">Demolition & Loading</a>
+        <span class="text-gray-600">|</span>
+        <a href="/gallery" class="text-cigna-yellow hover:text-yellow-400 font-medium">See Our Work</a>
+        <span class="text-gray-600">|</span>
+        <a href="/contact" class="text-cigna-yellow hover:text-yellow-400 font-medium">Get a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+  <MobileStickyButtons slot="mobile-cta" />
+</BaseLayout>
+
+<style>
+  /* Hide default details marker */
+  details summary::-webkit-details-marker {
+    display: none;
+  }
+</style>

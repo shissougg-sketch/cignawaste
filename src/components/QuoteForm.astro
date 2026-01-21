@@ -112,6 +112,7 @@ const FORMSUBMIT_EMAIL = "Mike.Ciigna24@gmail.com";
         class={inputClass}
         aria-required="true"
       />
+      <span class="field-error hidden text-red-500 text-sm mt-1" data-field="name">Please enter your name</span>
     </div>
 
     <!-- Phone -->
@@ -128,21 +129,25 @@ const FORMSUBMIT_EMAIL = "Mike.Ciigna24@gmail.com";
         class={inputClass}
         aria-required="true"
       />
+      <span class="field-error hidden text-red-500 text-sm mt-1" data-field="phone">Please enter a valid phone number</span>
     </div>
   </div>
 
   <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
     <!-- Email -->
     <div>
-      <label for="email" class={labelClass}>Email</label>
+      <label for="email" class={labelClass}>Email *</label>
       <input
         type="email"
         id="email"
         name="email"
+        required
         maxlength="100"
         placeholder="your@email.com"
         class={inputClass}
+        aria-required="true"
       />
+      <span class="field-error hidden text-red-500 text-sm mt-1" data-field="email">Please enter a valid email address</span>
     </div>
 
     <!-- Town -->
@@ -168,6 +173,7 @@ const FORMSUBMIT_EMAIL = "Mike.Ciigna24@gmail.com";
         </optgroup>
         <option value="Other (specify in description)">Other (specify in description)</option>
       </select>
+      <span class="field-error hidden text-red-500 text-sm mt-1" data-field="town">Please select your town</span>
     </div>
   </div>
 
@@ -186,6 +192,7 @@ const FORMSUBMIT_EMAIL = "Mike.Ciigna24@gmail.com";
           <option value={service === "-- Select Service --" ? "" : service}>{service}</option>
         ))}
       </select>
+      <span class="field-error hidden text-red-500 text-sm mt-1" data-field="service">Please select a service type</span>
     </div>
 
     <!-- Dumpster Size -->
@@ -227,7 +234,7 @@ const FORMSUBMIT_EMAIL = "Mike.Ciigna24@gmail.com";
     id="submit-btn"
     class="w-full btn-primary text-xl py-4"
   >
-    Get My Free Quote
+    Get My Quote Now
   </button>
 
 </form>
@@ -251,7 +258,7 @@ const FORMSUBMIT_EMAIL = "Mike.Ciigna24@gmail.com";
 </div>
 
 <!-- Error Message -->
-<div id="form-error" class="hidden p-4 bg-red-100 text-red-800 rounded-lg text-center">
+<div id="form-error" class="hidden p-4 bg-red-100 text-red-800 rounded-lg text-center" role="alert" aria-live="polite">
   Something went wrong. Please call us directly at <a href="tel:+16318555502" class="font-bold underline">631-855-5502</a>.
 </div>
 
@@ -261,8 +268,58 @@ const FORMSUBMIT_EMAIL = "Mike.Ciigna24@gmail.com";
   const successMsg = document.getElementById('form-success');
   const errorMsg = document.getElementById('form-error');
 
+  // Field validation rules
+  const validateField = (field: HTMLInputElement | HTMLSelectElement): boolean => {
+    const errorSpan = field.parentElement?.querySelector('.field-error') as HTMLElement;
+    let isValid = true;
+
+    if (field.hasAttribute('required') && !field.value.trim()) {
+      isValid = false;
+    } else if (field.type === 'email' && field.value) {
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      isValid = emailPattern.test(field.value);
+    } else if (field.type === 'tel' && field.value) {
+      const phonePattern = /[\d\s\-\(\)\+]{10,20}/;
+      isValid = phonePattern.test(field.value);
+    }
+
+    if (errorSpan) {
+      if (isValid) {
+        errorSpan.classList.add('hidden');
+        field.classList.remove('border-red-500');
+      } else {
+        errorSpan.classList.remove('hidden');
+        field.classList.add('border-red-500');
+      }
+    }
+
+    return isValid;
+  };
+
+  // Add blur validation to required fields
+  const requiredFields = form?.querySelectorAll('input[required], select[required], input[type="email"]');
+  requiredFields?.forEach((field) => {
+    field.addEventListener('blur', () => validateField(field as HTMLInputElement | HTMLSelectElement));
+    field.addEventListener('change', () => validateField(field as HTMLInputElement | HTMLSelectElement));
+  });
+
   form?.addEventListener('submit', async (e) => {
     e.preventDefault();
+
+    // Validate all fields before submission
+    let allValid = true;
+    requiredFields?.forEach((field) => {
+      if (!validateField(field as HTMLInputElement | HTMLSelectElement)) {
+        allValid = false;
+      }
+    });
+
+    if (!allValid) {
+      // Focus first invalid field
+      const firstError = form.querySelector('.border-red-500') as HTMLElement;
+      firstError?.focus();
+      return;
+    }
 
     // Show loading state
     submitBtn.disabled = true;
@@ -291,7 +348,7 @@ const FORMSUBMIT_EMAIL = "Mike.Ciigna24@gmail.com";
       // Error - show error message, reset button
       errorMsg?.classList.remove('hidden');
       submitBtn.disabled = false;
-      submitBtn.textContent = 'Get My Free Quote';
+      submitBtn.textContent = 'Get My Quote Now';
     }
   });
 </script>

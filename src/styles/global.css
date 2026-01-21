@@ -59,3 +59,15 @@
     @apply max-w-7xl mx-auto px-3 sm:px-4 md:px-6 lg:px-8;
   }
 }
+
+/* Keyboard focus states for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[role="button"]:focus-visible,
+details summary:focus-visible {
+  outline: 2px solid #FFD700;
+  outline-offset: 2px;
+}
