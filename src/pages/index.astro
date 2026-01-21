@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import MobileStickyButtons from '../components/MobileStickyButtons.astro';
-import QuoteForm from '../components/QuoteForm.astro';
+import QuickQuoteForm from '../components/QuickQuoteForm.astro';
 import { PHONE, PHONE_LINK, TEXT_LINK } from '../constants/contact';
 import '../styles/global.css';
 
@@ -23,6 +23,24 @@ const whyChoose = [
   { title: "Licensed & Insured", description: "Fully licensed and insured for your protection", icon: "shield" },
   { title: "Fast Response", description: "Quick delivery, often same or next day", icon: "lightning" },
   { title: "Flexible Scheduling", description: "Work around your timeline", icon: "calendar" },
+];
+
+const reviews = [
+  {
+    text: "Fast delivery, fair pricing. Had a dumpster in my driveway within 24 hours of calling. Will definitely use again.",
+    author: "Mike R.",
+    location: "Massapequa"
+  },
+  {
+    text: "The crew was professional and careful with my landscaping. Best dumpster service on Long Island.",
+    author: "Jennifer S.",
+    location: "Huntington"
+  },
+  {
+    text: "Used them for a kitchen demo. They handled everything — demolition and hauling. Made the project so much easier.",
+    author: "Tom & Lisa M.",
+    location: "Smithtown"
+  }
 ];
 ---
 
@@ -48,26 +66,44 @@ const whyChoose = [
 
     <div class="container-custom relative py-12 sm:py-16 md:py-24">
       <div class="max-w-3xl">
-        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-heading font-bold mb-4 [text-shadow:_2px_2px_4px_rgb(0_0_0_/_50%)]">
           <span class="text-cigna-yellow">Got Junk?</span><br />
           We've Got Dumpsters.
         </h1>
-        <p class="text-lg sm:text-xl md:text-2xl text-gray-300 mb-6 sm:mb-8">
+        <p class="text-lg sm:text-xl md:text-2xl text-gray-300 mb-4 [text-shadow:_2px_2px_4px_rgb(0_0_0_/_50%)]">
           Rent a dumpster in Nassau or Suffolk County — delivered when you need it.
         </p>
-        <!-- Hidden on mobile since sticky CTA buttons handle this -->
-        <div class="hidden sm:flex flex-row gap-4">
-          <a href={phoneLink} class="btn-secondary">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+        <!-- Trust badges -->
+        <div class="flex flex-wrap gap-x-4 gap-y-2 mb-6 sm:mb-8 text-sm sm:text-base">
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-cigna-red" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-white">Same-Day Delivery</span>
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-cigna-red" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-white">Family-Owned</span>
+          </span>
+          <span class="flex items-center gap-1.5">
+            <svg class="w-4 h-4 sm:w-5 sm:h-5 text-cigna-red" fill="currentColor" viewBox="0 0 20 20">
+              <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+            </svg>
+            <span class="text-white">20+ Years on Long Island</span>
+          </span>
+        </div>
+        <!-- Desktop CTA buttons -->
+        <div class="hidden md:flex flex-row gap-4 items-center">
+          <a href="#quote-section" class="btn-primary">
+            Get a Free Quote
+          </a>
+          <a href={phoneLink} class="flex items-center gap-2 bg-cigna-yellow text-cigna-charcoal font-bold py-3 px-5 sm:py-4 sm:px-6 rounded-lg hover:bg-yellow-400 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
               <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
             </svg>
-            Call Now — Free Quote
-          </a>
-          <a href={textLink} class="btn-primary">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-              <path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.841 8.841 0 01-4.083-.98L2 17l1.338-3.123C2.493 12.767 2 11.434 2 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM7 9H5v2h2V9zm8 0h-2v2h2V9zM9 9h2v2H9V9z" clip-rule="evenodd" />
-            </svg>
-            Text for Quote
+            <span class="text-lg">{phone}</span>
           </a>
         </div>
       </div>
@@ -120,7 +156,7 @@ const whyChoose = [
 
       <div class="grid md:grid-cols-2 gap-6 sm:gap-8 max-w-4xl mx-auto">
         <!-- Demolition -->
-        <div class="bg-white rounded-xl p-6 sm:p-8 shadow-lg">
+        <div class="bg-white rounded-xl p-6 sm:p-8 shadow-lg border-2 border-transparent hover:border-cigna-yellow transition-colors">
           <div class="w-12 h-12 sm:w-14 sm:h-14 bg-cigna-yellow rounded-lg flex items-center justify-center mb-3 sm:mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8 text-cigna-charcoal" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
@@ -136,7 +172,7 @@ const whyChoose = [
         </div>
 
         <!-- Loading Service -->
-        <div class="bg-white rounded-xl p-6 sm:p-8 shadow-lg">
+        <div class="bg-white rounded-xl p-6 sm:p-8 shadow-lg border-2 border-transparent hover:border-cigna-yellow transition-colors">
           <div class="w-12 h-12 sm:w-14 sm:h-14 bg-cigna-yellow rounded-lg flex items-center justify-center mb-3 sm:mb-4">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-8 sm:w-8 text-cigna-charcoal" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4" />
@@ -165,31 +201,31 @@ const whyChoose = [
 
       <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 md:gap-8">
         {whyChoose.map((item) => (
-          <div class="text-center">
-            <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-2 sm:mb-3 bg-white/10 rounded-full flex items-center justify-center">
+          <div class="text-center bg-white text-cigna-charcoal p-4 sm:p-6 rounded-lg border-2 border-transparent hover:border-cigna-yellow transition-colors">
+            <div class="w-12 h-12 sm:w-14 sm:h-14 mx-auto mb-2 sm:mb-3 bg-cigna-red/10 rounded-full flex items-center justify-center">
               {item.icon === "home" && (
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7 text-cigna-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7 text-cigna-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
                 </svg>
               )}
               {item.icon === "shield" && (
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7 text-cigna-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7 text-cigna-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                 </svg>
               )}
               {item.icon === "lightning" && (
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7 text-cigna-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7 text-cigna-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
                 </svg>
               )}
               {item.icon === "calendar" && (
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7 text-cigna-yellow" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 sm:h-7 sm:w-7 text-cigna-red" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
               )}
             </div>
             <h3 class="text-base sm:text-lg font-bold mb-1 sm:mb-2">{item.title}</h3>
-            <p class="text-red-100 text-xs sm:text-sm">{item.description}</p>
+            <p class="text-gray-600 text-xs sm:text-sm">{item.description}</p>
           </div>
         ))}
       </div>
@@ -232,36 +268,50 @@ const whyChoose = [
     </div>
   </section>
 
-  <!-- Final CTA Section -->
-  <section class="py-12 sm:py-16 bg-cigna-charcoal text-white">
+  <!-- Reviews + Quote Section -->
+  <section id="quote-section" class="py-12 sm:py-16 bg-cigna-red scroll-mt-16">
     <div class="container-custom">
-      <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-        <div>
-          <h2 class="text-2xl sm:text-3xl md:text-4xl font-heading mb-3 sm:mb-4">
-            Ready to Get <span class="text-cigna-yellow">Started</span>?
+      <div class="grid lg:grid-cols-2 gap-6 lg:gap-8 items-stretch">
+        <!-- Left: Reviews -->
+        <div class="bg-white rounded-xl p-6 sm:p-8 shadow-lg">
+          <h2 class="text-2xl sm:text-3xl font-heading text-cigna-charcoal mb-2">
+            What Our <span class="text-cigna-red">Customers</span> Say
           </h2>
-          <p class="text-lg sm:text-xl text-gray-300 mb-4 sm:mb-6">
-            Get a free quote for your project. No automated pricing — just a real conversation about what you need.
-          </p>
-          <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-6 sm:mb-8">
-            <a href={phoneLink} class="btn-secondary">
-              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-              </svg>
-              Call Now — Free Quote
-            </a>
-            <a href={textLink} class="btn-primary">
-              Text for Quote
-            </a>
+          <p class="text-gray-600 mb-6">Real reviews from Long Island homeowners and contractors.</p>
+
+          <div class="space-y-4">
+            {reviews.map((review) => (
+              <div class="bg-gray-50 rounded-xl p-4 border border-gray-100">
+                <!-- Stars -->
+                <div class="flex gap-1 mb-2">
+                  {[1, 2, 3, 4, 5].map(() => (
+                    <svg class="w-4 h-4 text-cigna-yellow" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                    </svg>
+                  ))}
+                </div>
+                <p class="text-gray-700 text-sm mb-2">"{review.text}"</p>
+                <p class="text-xs text-gray-500 font-medium">— {review.author}, {review.location}</p>
+              </div>
+            ))}
           </div>
-          <p class="text-sm sm:text-base text-gray-400">
-            <strong class="text-cigna-yellow">Serving:</strong> Nassau County • Suffolk County • All of Long Island
-          </p>
         </div>
 
-        <div class="bg-white/10 rounded-xl p-5 sm:p-6 md:p-8">
-          <h3 class="text-2xl font-bold mb-6">Request a Quote</h3>
-          <QuoteForm variant="dark" compact />
+        <!-- Right: Quote Form -->
+        <div class="bg-white rounded-xl p-6 sm:p-8 shadow-lg">
+          <h2 class="text-2xl sm:text-3xl font-heading text-cigna-charcoal mb-2">
+            Ready to Get <span class="text-cigna-red">Started</span>?
+          </h2>
+          <p class="text-gray-600 mb-6">Tell us what you need and we'll get back to you with a quote.</p>
+
+          <QuickQuoteForm variant="light" />
+
+          <p class="text-sm text-gray-500 mt-6 text-center">
+            Or call us directly at <a href={phoneLink} class="text-cigna-red font-bold hover:underline">{phone}</a>
+          </p>
+          <p class="text-xs text-gray-400 mt-3 text-center">
+            Serving Nassau County • Suffolk County • All of Long Island
+          </p>
         </div>
       </div>
     </div>

@@ -1,0 +1,100 @@
+---
+interface Props {
+  variant?: 'light' | 'dark';
+}
+
+const { variant = 'dark' } = Astro.props;
+
+const services = [
+  { value: "", label: "What do you need?" },
+  { value: "Dumpster Rental", label: "Dumpster Rental" },
+  { value: "Demolition", label: "Demolition" },
+  { value: "Loading Service", label: "Loading Service" },
+  { value: "Multiple Services", label: "Multiple Services" },
+];
+
+const dumpsterSizes = [
+  { value: "", label: "Dumpster size" },
+  { value: "10 Yard", label: "10 Yard" },
+  { value: "15 Yard", label: "15 Yard" },
+  { value: "20 Yard", label: "20 Yard" },
+  { value: "30 Yard", label: "30 Yard" },
+  { value: "Not Sure", label: "Not Sure" },
+];
+
+const inputClass = variant === 'light'
+  ? "w-full px-4 py-3.5 rounded-lg bg-gray-50 border border-gray-300 text-cigna-charcoal placeholder-gray-400 focus:ring-2 focus:ring-cigna-red focus:border-transparent min-h-[44px]"
+  : "w-full px-4 py-3.5 rounded-lg bg-gray-800 border border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-cigna-yellow focus:border-transparent min-h-[44px]";
+
+const labelClass = variant === 'light'
+  ? "block text-sm font-medium text-gray-700 mb-1"
+  : "block text-sm font-medium text-gray-300 mb-1";
+---
+
+<form id="quick-quote-form" class="space-y-4">
+  <div>
+    <label for="quick-service" class={labelClass}>Service Type</label>
+    <select
+      id="quick-service"
+      name="service"
+      class={inputClass}
+    >
+      {services.map((service) => (
+        <option value={service.value}>{service.label}</option>
+      ))}
+    </select>
+  </div>
+
+  <div>
+    <label for="quick-size" class={labelClass}>Dumpster Size</label>
+    <select
+      id="quick-size"
+      name="size"
+      class={inputClass}
+    >
+      {dumpsterSizes.map((size) => (
+        <option value={size.value}>{size.label}</option>
+      ))}
+    </select>
+  </div>
+
+  <div>
+    <label for="quick-description" class={labelClass}>Tell us about your project</label>
+    <textarea
+      id="quick-description"
+      name="description"
+      rows="3"
+      placeholder="Brief description of your project..."
+      class={inputClass}
+    ></textarea>
+  </div>
+
+  <button
+    type="submit"
+    class="w-full btn-primary text-xl py-4"
+  >
+    Get My Quote
+  </button>
+</form>
+
+<script>
+  const form = document.getElementById('quick-quote-form') as HTMLFormElement;
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const service = (document.getElementById('quick-service') as HTMLSelectElement).value;
+    const size = (document.getElementById('quick-size') as HTMLSelectElement).value;
+    const description = (document.getElementById('quick-description') as HTMLTextAreaElement).value;
+
+    const params = new URLSearchParams();
+    if (service) params.set('service', service);
+    if (size) params.set('size', size);
+    if (description) params.set('description', description);
+
+    const queryString = params.toString();
+    const url = queryString ? `/contact?${queryString}#quote-form` : '/contact#quote-form';
+
+    window.location.href = url;
+  });
+</script>

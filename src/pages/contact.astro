@@ -73,16 +73,40 @@ const serviceAreas = {
   <section class="py-16 bg-white">
     <div class="container-custom">
       <div class="grid lg:grid-cols-2 gap-12">
-        <!-- Contact Info -->
+        <!-- Quote Form - Now on left -->
+        <div id="quote-form" class="scroll-mt-24">
+          <h2 class="text-2xl font-heading font-bold text-cigna-charcoal mb-6">
+            Request a Quote Online
+          </h2>
+          <div class="bg-gray-50 rounded-xl p-6 md:p-8">
+            <!-- Success Message (shown after form submission) -->
+            <div id="submission-success" class="hidden text-center py-8">
+              <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-cigna-charcoal mb-2">Quote Request Sent!</h3>
+              <p class="text-gray-600 mb-4">Thank you for reaching out. We'll get back to you shortly.</p>
+              <p class="text-sm text-gray-500">You can also call us at <span class="text-cigna-red font-bold">{phone}</span> for immediate assistance.</p>
+            </div>
+            <!-- Form (hidden after submission) -->
+            <div id="quote-form-container">
+              <QuoteForm />
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Info - Now on right -->
         <div>
           <h2 class="text-2xl font-heading font-bold text-cigna-charcoal mb-6">
             Contact Us Directly
           </h2>
 
-          <!-- Phone Card -->
+          <!-- Phone Card - Mobile only (can actually tap to call) -->
           <a
             href={phoneLink}
-            class="block bg-cigna-red text-white rounded-xl p-6 mb-4 hover:bg-red-700 transition-colors"
+            class="block md:hidden bg-cigna-red text-white rounded-xl p-6 mb-4 hover:bg-red-700 transition-colors"
           >
             <div class="flex items-center gap-4">
               <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
@@ -98,10 +122,10 @@ const serviceAreas = {
             </div>
           </a>
 
-          <!-- Text Card -->
+          <!-- Text Card - Mobile only (can actually tap to text) -->
           <a
             href={textLink}
-            class="block bg-cigna-yellow text-cigna-charcoal rounded-xl p-6 mb-8 hover:bg-yellow-400 transition-colors"
+            class="block md:hidden bg-cigna-yellow text-cigna-charcoal rounded-xl p-6 mb-8 hover:bg-yellow-400 transition-colors"
           >
             <div class="flex items-center gap-4">
               <div class="w-16 h-16 bg-black/10 rounded-full flex items-center justify-center">
@@ -116,6 +140,21 @@ const serviceAreas = {
               </div>
             </div>
           </a>
+
+          <!-- Desktop: Phone number display (not clickable) -->
+          <div class="hidden md:block bg-gray-50 rounded-xl p-6 mb-8 border-2 border-gray-200">
+            <div class="flex items-center gap-4">
+              <div class="w-14 h-14 bg-cigna-red/10 rounded-full flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7 text-cigna-red" viewBox="0 0 20 20" fill="currentColor">
+                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                </svg>
+              </div>
+              <div>
+                <p class="text-gray-500 text-sm">Prefer to call?</p>
+                <p class="text-2xl font-bold text-cigna-charcoal">{phone}</p>
+              </div>
+            </div>
+          </div>
 
           <!-- What to Include -->
           <div class="bg-gray-100 rounded-xl p-6">
@@ -149,37 +188,51 @@ const serviceAreas = {
           </div>
         </div>
 
-        <!-- Quote Form -->
-        <div>
-          <h2 class="text-2xl font-heading font-bold text-cigna-charcoal mb-6">
-            Request a Quote Online
-          </h2>
-          <div class="bg-gray-50 rounded-xl p-6 md:p-8">
-            <!-- Success Message (shown after form submission) -->
-            <div id="submission-success" class="hidden text-center py-8">
-              <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                </svg>
-              </div>
-              <h3 class="text-2xl font-bold text-cigna-charcoal mb-2">Quote Request Sent!</h3>
-              <p class="text-gray-600 mb-4">Thank you for reaching out. We'll get back to you shortly.</p>
-              <p class="text-sm text-gray-500">You can also call us at <a href="tel:+16318555502" class="text-cigna-red font-bold">631-855-5502</a> for immediate assistance.</p>
-            </div>
-            <!-- Form (hidden after submission) -->
-            <div id="quote-form-container">
-              <QuoteForm />
-            </div>
-          </div>
-        </div>
-
         <script>
+          // Handle submission success
           if (window.location.search.includes('submitted=true')) {
             const successEl = document.getElementById('submission-success');
             const formContainer = document.getElementById('quote-form-container');
             if (successEl && formContainer) {
               successEl.classList.remove('hidden');
               formContainer.classList.add('hidden');
+            }
+          }
+
+          // Pre-fill form from URL parameters (from quick quote form)
+          const params = new URLSearchParams(window.location.search);
+          const serviceParam = params.get('service');
+          const sizeParam = params.get('size');
+          const descriptionParam = params.get('description');
+
+          if (serviceParam) {
+            const serviceSelect = document.getElementById('service') as HTMLSelectElement;
+            if (serviceSelect) {
+              for (const option of serviceSelect.options) {
+                if (option.value === serviceParam) {
+                  option.selected = true;
+                  break;
+                }
+              }
+            }
+          }
+
+          if (sizeParam) {
+            const sizeSelect = document.getElementById('size') as HTMLSelectElement;
+            if (sizeSelect) {
+              for (const option of sizeSelect.options) {
+                if (option.value === sizeParam) {
+                  option.selected = true;
+                  break;
+                }
+              }
+            }
+          }
+
+          if (descriptionParam) {
+            const descriptionTextarea = document.getElementById('description') as HTMLTextAreaElement;
+            if (descriptionTextarea) {
+              descriptionTextarea.value = descriptionParam;
             }
           }
         </script>
@@ -267,18 +320,24 @@ const serviceAreas = {
   <!-- Final CTA -->
   <section class="py-12 bg-cigna-charcoal text-white">
     <div class="container-custom text-center">
-      <p class="text-xl mb-4">
-        Not sure what you need? <span class="text-cigna-yellow">Just call us.</span>
-      </p>
-      <p class="text-gray-400 mb-6">
-        We'll help you figure out the right dumpster size and services for your project.
-      </p>
-      <a href={phoneLink} class="btn-primary text-xl">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
-          <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-        </svg>
-        Call Now — Free Quote
-      </a>
+      <!-- Desktop: Reference to form above -->
+      <div class="hidden md:block">
+        <p class="text-xl mb-4">
+          Not sure what you need? <span class="text-cigna-yellow">We're here to help.</span>
+        </p>
+        <p class="text-gray-400">
+          Fill out the form above or give us a call at <span class="text-cigna-yellow font-bold">{phone}</span>
+        </p>
+      </div>
+      <!-- Mobile: Hidden since sticky bar handles CTAs -->
+      <div class="md:hidden">
+        <p class="text-xl mb-2">
+          Not sure what you need? <span class="text-cigna-yellow">We're here to help.</span>
+        </p>
+        <p class="text-gray-400 text-sm">
+          Use the buttons below to call or text us.
+        </p>
+      </div>
     </div>
   </section>
 

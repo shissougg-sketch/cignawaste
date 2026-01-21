@@ -15,7 +15,7 @@ const dumpsterSizes = [
   {
     size: "10 Yard",
     image: "/images/dumpsters/dumpster-10.png",
-    dimensions: "12' L x 8' W x 3.5' H",
+    dimensions: "12' L x 7.5' W x 3.5' H",
     holds: "Holds 3-4 pickup truck loads",
     idealFor: [
       "Small cleanouts",
@@ -28,8 +28,8 @@ const dumpsterSizes = [
   {
     size: "15 Yard",
     image: "/images/dumpsters/dumpster-15.png",
-    dimensions: "14' L x 8' W x 4.5' H",
-    holds: "Holds 5-6 pickup truck loads",
+    dimensions: "14' L x 7.5' W x 4.5' H",
+    holds: "Holds 4-5 pickup truck loads",
     idealFor: [
       "Kitchen or bathroom remodel",
       "Basement cleanout",
@@ -41,8 +41,8 @@ const dumpsterSizes = [
   {
     size: "20 Yard",
     image: "/images/dumpsters/dumpster-20.png",
-    dimensions: "22' L x 8' W x 4.5' H",
-    holds: "Holds 7-8 pickup truck loads",
+    dimensions: "16' L x 7.5' W x 4.5' H",
+    holds: "Holds 5-7 pickup truck loads",
     idealFor: [
       "Roof tear-offs",
       "Large home cleanouts",
@@ -54,8 +54,8 @@ const dumpsterSizes = [
   {
     size: "30 Yard",
     image: "/images/dumpsters/dumpster-30.png",
-    dimensions: "22' L x 8' W x 6' H",
-    holds: "Holds 10-12 pickup truck loads",
+    dimensions: "22' L x 8' W x 8' H",
+    holds: "Holds 7-10 pickup truck loads",
     idealFor: [
       "Major construction projects",
       "Commercial jobs",
@@ -142,8 +142,11 @@ const notAccepted = [
       <h2 class="text-3xl md:text-4xl font-heading text-cigna-charcoal text-center mb-4">
         Choose Your <span class="text-cigna-red">Size</span>
       </h2>
-      <p class="text-lg text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+      <p class="text-lg text-gray-600 text-center mb-2 max-w-2xl mx-auto">
         Not sure which size you need? Call us and we'll help you figure it out.
+      </p>
+      <p class="text-sm text-gray-400 text-center mb-12">
+        *Dimensions may vary based on availability.
       </p>
 
       <div class="space-y-8">
@@ -183,7 +186,8 @@ const notAccepted = [
                 </ul>
               </div>
 
-              <a href={phoneLink} class="btn-secondary inline-flex">
+              <!-- Desktop: Link to contact form -->
+              <a href="/contact#quote-form" class="hidden md:inline-flex btn-secondary">
                 Get a Quote for {dumpster.size}
               </a>
             </div>
@@ -196,9 +200,12 @@ const notAccepted = [
   <!-- What We Accept -->
   <section class="py-16 bg-gray-100">
     <div class="container-custom">
-      <h2 class="text-3xl md:text-4xl font-heading text-cigna-charcoal text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-heading text-cigna-charcoal text-center mb-4">
         What We <span class="text-cigna-red">Accept</span>
       </h2>
+      <p class="text-center text-gray-600 mb-12">
+        Have more questions? Check out our <a href="/faq" class="text-cigna-red font-bold hover:underline">FAQ page</a>.
+      </p>
 
       <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
         <!-- Accepted -->
@@ -293,16 +300,12 @@ const notAccepted = [
       <p class="text-xl text-red-100 mb-8 max-w-2xl mx-auto">
         Not sure what size you need? No problem. Call or text us and we'll figure it out together.
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href={phoneLink} class="btn-primary text-lg">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
-          </svg>
-          Call {phone}
+      <!-- Desktop: Single quote button + phone display -->
+      <div class="hidden md:flex flex-row gap-4 justify-center items-center">
+        <a href="/contact#quote-form" class="btn-primary text-lg">
+          Request Quote Online
         </a>
-        <a href={textLink} class="btn-outline border-white text-white hover:bg-white hover:text-cigna-red text-lg">
-          Text for Quote
-        </a>
+        <span class="text-red-100">or call <span class="text-cigna-yellow font-bold">{phone}</span></span>
       </div>
     </div>
   </section>
