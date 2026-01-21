@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'cigna-red': '#C41E3A',
+        'cigna-red': '#B03045',
         'cigna-yellow': '#FFD700',
         'cigna-charcoal': '#1A1A1A',
         'cigna-cream': '#F5F5DC',
